@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Despesas</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f2f4f7;
+            padding: 25px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header {
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            color: #234b63;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px #00000010;
+        }
+
+        h2 {
+            color: #234b63;
+            margin-bottom: 18px;
+            font-size: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, select {
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 100%;
+        }
+
+        button {
+            padding: 11px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #234b63;
+            color: white;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #17364a;
+        }
+
+        .resumo {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .resumo-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #00000010;
+        }
+
+        .resumo-item p {
+            color: #777;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .resumo-item h3 {
+            font-size: 21px;
+            color: #234b63;
+        }
+
+        .despesas {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .despesas th, .despesas td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .despesas th {
+            background: #f5f7f9;
+        }
+
+        .excluir {
+            background: #d9534f;
+            margin: 0;
+            padding: 7px 12px;
+        }
+
+        .excluir:hover {
+            background: #b52b27;
+        }
+
+        .saldo-negativo {
+            color: #d9534f !important;
+        }
+
+        .saldo-positivo {
+            color: #24945c !important;
+        }
+
+        .tabela-container {
+            overflow-x: auto;
+        }
+
+        footer {
+            text-align: center;
+            color: #777;
+            padding: 20px;
+        }
+
+        @media (max-width: 750px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .resumo {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+
+            .form-grid, .resumo {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Controle de Despesas</h1>
+        <p>Organize sua vida financeira e acompanhe seus gastos mensais.</p>
+    </header>
+
+    <!-- INFORMAÇÕES PESSOAIS -->
+    <section class="card">
+        <h2>Informações Pessoais</h2>
+
+        <form id="formPerfil">
+            <div class="form-grid">
+
+                <div class="campo">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" id="nome" placeholder="Digite seu nome" required>
+                </div>
+
+                <div class="campo">
+                    <label for="salario">Salário mensal (R$)</label>
+                    <input type="number" id="salario" min="0" step="0.01" placeholder="0,00" required>
+                </div>
+
+                <div class="campo">
+                    <label for="alimentacao">Valor para alimentação (R$)</label>
+                    <input type="number" id="alimentacao" min="0" step="0.01" placeholder="0,00">
+                </div>
+
+            </div>
+
+            <button type="submit">Salvar informações</button>
+        </form>
+    </section>
+
+    <!-- RESUMO FINANCEIRO -->
+    <section class="resumo">
+
+        <div class="resumo-item">
+            <p>Salário</p>
+            <h3 id="totalSalario">R$ 0,00</h3>
+        </div>
+
+        <div class="resumo-item">
+            <p>Total de despesas</p>
+            <h3 id="totalDespesas">R$ 0,00</h3>
+        </div>
+
+        <div class="resumo-item">
+            <p>Saldo disponível</p>
+            <h3 id="saldo">R$ 0,00</h3>
+        </div>
+
+        <div class="resumo-item">
+            <p>Renda comprometida</p>
+            <h3 id="percentual">0%</h3>
+        </div>
+
+    </section>
+
+    <!-- CADASTRO DE DESPESAS -->
+    <section class="card">
+        <h2>Cadastrar Despesas</h2>
+
+        <form id="formDespesa">
+
+            <div class="form-grid">
+
+                <div class="campo">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao" placeholder="Ex: Aluguel" required>
+                </div>
+
+                <div class="campo">
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" required>
+                        <option value="">Selecione</option>
+                        <option>Cartão de crédito</option>
+                        <option>Aluguel</option>
+                        <option>Água</option>
+                        <option>Energia elétrica</option>
+                        <option>Internet</option>
+                        <option>Telefone</option>
+                        <option>Transporte</option>
+                        <option>Saúde</option>
+                        <option>Mercado</option>
+                        <option>Lazer</option>
+                        <option>Educação</option>
+                        <option>Outros</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="valor">Valor (R$)</label>
+                    <input type="number" id="valor" min="0.01" step="0.01" placeholder="0,00" required>
+                </div>
+
+            </div>
+
+            <button type="submit">Adicionar despesa</button>
+
+        </form>
+    </section>
+
+    <!-- LISTA DE DESPESAS -->
+    <section class="card">
+        <h2>Minhas Despesas</h2>
+
+        <div class="tabela-container">
+            <table class="despesas">
+
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listaDespesas">
+                    <tr>
+                        <td colspan="4">Nenhuma despesa cadastrada.</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <p>Controle de Despesas Pessoais</p>
+    </footer>
+
+</div>
+
+<script>
+
+    // Dados iniciais
+    let perfil = JSON.parse(localStorage.getItem("perfil")) || {
+        nome: "",
+        salario: 0,
+        alimentacao: 0
+    };
+
+    let despesas = JSON.parse(localStorage.getItem("despesas")) || [];
+
+    // Formatar valores em reais
+    function formatarMoeda(valor) {
+        return Number(valor).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+    }
+
+    // Salvar informações pessoais
+    document.getElementById("formPerfil").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        perfil.nome = document.getElementById("nome").value;
+        perfil.salario = Number(document.getElementById("salario").value);
+        perfil.alimentacao = Number(document.getElementById("alimentacao").value);
+
+        localStorage.setItem("perfil", JSON.stringify(perfil));
+
+        atualizarSistema();
+
+        alert("Informações salvas com sucesso!");
+    });
+
+    // Adicionar despesa
+    document.getElementById("formDespesa").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        let novaDespesa = {
+            id: Date.now(),
+            descricao: document.getElementById("descricao").value,
+            categoria: document.getElementById("categoria").value,
+            valor: Number(document.getElementById("valor").value)
+        };
+
+        despesas.push(novaDespesa);
+
+        localStorage.setItem("despesas", JSON.stringify(despesas));
+
+        this.reset();
+
+        atualizarSistema();
+    });
+
+    // Excluir despesa
+    function excluirDespesa(id) {
+        despesas = despesas.filter(function(despesa) {
+            return despesa.id !== id;
+        });
+
+        localStorage.setItem("despesas", JSON.stringify(despesas));
+
+        atualizarSistema();
+    }
+
+    // Atualizar informações na tela
+    function atualizarSistema() {
+
+        let total = despesas.reduce(function(soma, despesa) {
+            return soma + despesa.valor;
+        }, 0);
+
+        // Alimentação também entra como despesa
+        let totalGastos = total + perfil.alimentacao;
+
+        let saldoAtual = perfil.salario - totalGastos;
+
+        let porcentagem = perfil.salario > 0
+            ? (totalGastos / perfil.salario) * 100
+            : 0;
+
+        document.getElementById("totalSalario").textContent =
+            formatarMoeda(perfil.salario);
+
+        document.getElementById("totalDespesas").textContent =
+            formatarMoeda(totalGastos);
+
+        document.getElementById("saldo").textContent =
+            formatarMoeda(saldoAtual);
+
+        document.getElementById("saldo").className =
+            saldoAtual < 0 ? "saldo-negativo" : "saldo-positivo";
+
+        document.getElementById("percentual").textContent =
+            porcentagem.toFixed(1) + "%";
+
+        // Listar despesas
+        let lista = document.getElementById("listaDespesas");
+
+        lista.innerHTML = "";
+
+        if (despesas.length === 0) {
+            lista.innerHTML = `
+                <tr>
+                    <td colspan="4">Nenhuma despesa cadastrada.</td>
+                </tr>
+            `;
+        }
+
+        despesas.forEach(function(despesa) {
+
+            let linha = document.createElement("tr");
+
+            let descricao = document.createElement("td");
+            descricao.textContent = despesa.descricao;
+
+            let categoria = document.createElement("td");
+            categoria.textContent = despesa.categoria;
+
+            let valor = document.createElement("td");
+            valor.textContent = formatarMoeda(despesa.valor);
+
+            let acao = document.createElement("td");
+
+            let botao = document.createElement("button");
+            botao.textContent = "Excluir";
+            botao.className = "excluir";
+
+            botao.addEventListener("click", function() {
+                excluirDespesa(despesa.id);
+            });
+
+            acao.appendChild(botao);
+
+            linha.appendChild(descricao);
+            linha.appendChild(categoria);
+            linha.appendChild(valor);
+            linha.appendChild(acao);
+
+            lista.appendChild(linha);
+        });
+
+        localStorage.setItem("despesas", JSON.stringify(despesas));
+    }
+
+    // Carregar informações salvas
+    function carregarPerfil() {
+        document.getElementById("nome").value = perfil.nome;
+        document.getElementById("salario").value = perfil.salario || "";
+        document.getElementById("alimentacao").value = perfil.alimentacao || "";
+    }
+
+    carregarPerfil();
+    atualizarSistema();
+
+</script>
+
+</body>
+</html>
