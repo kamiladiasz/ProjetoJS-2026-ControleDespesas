@@ -57,11 +57,16 @@ body {
     margin-bottom: 20px;
 }
 
+.form-info{
+    padding-bottom: 8px;
+}
+
 .card {
     padding: 40px;
     border-radius: 10px;
     margin-bottom: 20px;
     box-shadow: 0 3px 12px 2px rgba(0, 0, 0, 0.09);
+
 
 }
 
@@ -99,6 +104,8 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
+
+
 .campo {
     display: flex;
     flex-direction: column;
@@ -121,6 +128,11 @@ button {
 button:hover {
     background-color: #1d4ed8;
     color: white;
+}
+#form-info{
+    display: grid;
+    grid-template-columns: (3, 1fr);
+
 }
 
 .tabela-despesas {
