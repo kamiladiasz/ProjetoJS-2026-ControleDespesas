@@ -8,30 +8,155 @@
 
 body {
     /*estilização do corpo completo*/
-    background: #f2f4f7;
+    background: #f4f6fa;
     /*cor de fundo pagina*/
     padding: 25px;
     /*margem de espaçamento interno*/
-    color: #333;
+    color: #000000;
     /*cor do texto*/
+}
+
+#cabecalho {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#titulo-cabecalho {
+    font-size: 30px;
+    color: #375e9e;
+    margin-bottom: 8px;
+}
+
+#p-cabecalho {
+    font-size: 17px;
 }
 
 .container {
     max-width: 1100px;
+    width: 100%;
     /*limite de largura do conteudo*/
-    margin: auto;
+    margin: 0 auto;
     /* centralizar elemento quando for possivel*/
+    padding: 30px;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .form-grid {
     display: grid;
-    /*sistema de grade*/
     grid-template-columns: repeat(3, 1fr);
-    /*definicação de colunas com mesmo tamanho*/
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
-@media(max-width: 750px){
-    .form-grid{
+.card {
+    padding: 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px 2px rgba(0, 0, 0, 0.09);
+
+}
+
+.card h2 {
+    color: #1e293b;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid black;
+    margin: 25px 0;
+}
+
+label {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background-color: #ffffff;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #6d97f1;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 4px;
+}
+
+button {
+    background-color: #6d97f131;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px black;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+    color: white;
+}
+
+.tabela-despesas {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: (3, 1fr);
+    box-shadow: 0 3px 12px 2px rgba(0, 0, 0, 0.09);
+    overflow-x: auto;
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #f1f5f9;
+    color: #334155;
+    padding: 14px;
+    text-align: center;
+    font-size: 14px;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1x solid #e2e8f0;
+    font-size: 14px;
+}
+
+
+
+@media(max-width: 750px) {
+    .form-grid {
         grid-template-columns: 1fr 1fr;
     }
 }
