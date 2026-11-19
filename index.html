@@ -18,7 +18,6 @@
         <section class="card">
             <h2>Informações Pessoais</h2>
             <hr>
-
             <form id="form-perfil">
                 <div class="perfil-grid">
                     <div class="campo">
@@ -28,11 +27,11 @@
 
                     <div class="campo">
                         <label for="salario">Salario Mensal: </label>
-                        <input type="number" id="salario" required>
+                        <input type="number" id="salario"  min="0" required>
                     </div>
                     <div class="campo">
                         <label for="alimentacao">Alimentação: </label>
-                        <input type="text" id="alimentacao" required>
+                        <input type="number" id="alimentacao" min="0" required>
                     </div>
 
                 </div>
@@ -44,13 +43,16 @@
         </section>
 
         <section class="card">
-            <div class="form-grid">
-                <form id="form-despesas">
-                    <div class="form-info">
+            <h2>Adicionar Despesas</h2>
+            <hr>
+            <div class="form-perfil">
+                <form id="form-despesas" class="form-grid">
+                    <div class="campo">
                         <label for="descricao">Descrição</label>
                         <input type="text" id="descricao" required>
                     </div>
-                    <div class="form-info">
+
+                    <div class="campo">
                         <label for="categoria">Categoria</label>
                         <select id="categoria" required>
                             <option value="cartao">Cartão de Crédito</option>
@@ -61,38 +63,68 @@
                             <option value="outros">Outros</option>
                         </select>
                     </div>
-                    <div class="form-info">
-                        <div id="valor-despesa">
-                            <label for="valor">Valor</label>
-                            <input type="number" id="valor" required>
-                        </div>
+
+                    <div class="campo">
+                        <label for="valor">Valor</label>
+                        <input type="number" id="valor" min="0" required>
                     </div>
 
                     <button type="submit" id="btn-salvar-despesa">Adicionar Despesa</button>
                 </form>
+            </div>
         </section>
 
+        <section class="card">
+            <div class="form-despesas">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Categoria</th>
+                            <th>Valor</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
 
-        <div class="tabela-despesas">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Descrição</th>
-                        <th>Categoria</th>
-                        <th>Valor</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
+                    <tbody id="listaDespesas">
+                        <tr>
+                            <td colspan="4">Nenhuma despesa cadastrada.</td>
+                        </tr>
+                    </tbody>
 
-                <tbody id="listaDespesas">
-                    <tr>
-                        <td colspan="4">Nenhuma despesa cadastrada.</td>
-                    </tr>
-                </tbody>
+                </table>
+            </div>
+        </section>
 
-            </table>
+        <section class="card">
+            <h2>Resumo Financeiro</h2>
+            <hr>
 
-        </div>
+            <div id="calculo" class="resumo-grid">
+
+                <div class="campo">
+                    <p>Salário:</p>
+                    <h2 id="salarioResumo">R$ 0,00</h2>
+                </div>
+
+                <div class="campo">
+                    <p>Alimentação:</p>
+                    <h2 id="alimentacaoResumo">R$ 0,00</h2>
+                </div>
+
+                <div class="campo">
+                    <p>Total:</p>
+                    <h2 id="totalResumo">R$ 0,00</h2>
+                </div>
+
+                <div class="campo">
+                    <p>Saldo disponível:</p>
+                    <h2 id="saldoPagar">R$ 0,00</h2>
+                </div>
+
+            </div>
+        </section>
+    </div>
     </div>
 
     <script src="script.js"></script>
