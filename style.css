@@ -1,0 +1,581 @@
+
+/* ==============================
+   CONFIGURAÇÕES GERAIS
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6fa;
+    color: #1e293b;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    width: 100%;
+    margin: auto;
+}
+
+
+
+#cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+#titulo-cabecalho {
+    font-size: 26px;
+    color: #164757;
+    margin-bottom: 8px;
+
+}
+
+#p-cabecalho {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.ano {
+    background-color: #e0f2fe;
+    color: #164757;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+
+
+.layout-principal {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+
+
+.coluna-lateral {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+
+
+.conteudo-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+
+
+.card {
+    background-color: #ffffff;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    min-width: 0;
+}
+
+.card h2 {
+    color: #164757;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 15px 0;
+}
+
+
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.campo label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #475569;
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+    min-width: 0;
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    outline: none;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #1e293b;
+}
+
+.campo input:focus,
+.campo select:focus {
+    border-color: #2395ba;
+    box-shadow: 0 0 0 2px rgba(35, 149, 186, 0.12);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    align-items: end;
+}
+
+
+
+#form-perfil {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+#form-perfil[hidden] {
+    display: none;
+}
+
+
+
+button {
+    border: none;
+    border-radius: 7px;
+    padding: 11px 15px;
+    background-color: #2395ba;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #164757;
+}
+
+.btn-adicionar {
+    width: 100%;
+    margin-bottom: 12px;
+    background-color: #164757;
+}
+
+.btn-adicionar:hover {
+    background-color: #2395ba;
+}
+
+#btn-salvar-pessoal,
+#btn-salvar-despesa {
+    background-color: #01a878;
+}
+
+#btn-salvar-pessoal:hover,
+#btn-salvar-despesa:hover {
+    background-color: #008b63;
+}
+
+
+
+.abas-pessoas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.aba-pessoa-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.aba-pessoa {
+    flex: 1;
+    width: 100%;
+    text-align: left;
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    font-weight: normal;
+}
+
+.aba-pessoa:hover {
+    background-color: #e0f2fe;
+    color: #164757;
+}
+
+.aba-pessoa.ativa {
+    background-color: #164757;
+    color: #ffffff;
+    border-color: #164757;
+    font-weight: bold;
+}
+
+
+
+.btn-excluir-pessoa {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 36px;
+    padding: 0;
+    background-color: #fee2e2;
+    color: #dc2626;
+    font-size: 20px;
+    border: 1px solid #fecaca;
+}
+
+.btn-excluir-pessoa:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+
+
+.resumo-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resumo-item {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #2395ba;
+    border-radius: 8px;
+    padding: 13px;
+}
+
+.resumo-item p {
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 7px;
+}
+
+.resumo-item h2 {
+    font-size: 19px;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.saldo-item {
+    border-left-color: #01c290;
+    background-color: #ecfdf5;
+}
+
+.saldo-item h2 {
+    color: #008b63;
+}
+
+
+
+.form-despesas {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+thead {
+    background-color: #164757;
+    color: #ffffff;
+}
+
+th,
+td {
+    padding: 13px 8px;
+    text-align: left;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+th {
+    font-weight: bold;
+}
+
+td {
+    border-bottom: 1px solid #e2e8f0;
+    color: #475569;
+}
+
+tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Largura das colunas */
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 13%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 12%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 23%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 18%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 17%;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+    width: 17%;
+}
+
+td button {
+    padding: 8px;
+    font-size: 11px;
+    background-color: #dc3545;
+}
+
+td button:hover {
+    background-color: #b91c1c;
+}
+
+
+/* ==============================
+   MENSAGEM DE TABELA VAZIA
+============================== */
+
+#listaDespesas td[colspan] {
+    text-align: center;
+    padding: 25px;
+    color: #94a3b8;
+}
+
+
+/* ==============================
+   RODAPÉ
+============================== */
+
+footer {
+    text-align: center;
+    padding: 25px 10px;
+    margin-top: 20px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+footer span {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+
+/* TABLETS*/
+
+@media (max-width: 900px) {
+
+    .layout-principal {
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 15px;
+    }
+
+    .card {
+        padding: 17px;
+    }
+
+    th,
+    td {
+        font-size: 12px;
+        padding: 10px 5px;
+    }
+
+}
+
+
+/*CELULARES */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 12px;
+    }
+
+    #cabecalho {
+        padding: 18px;
+    }
+
+    #titulo-cabecalho {
+        font-size: 21px;
+    }
+
+    .layout-principal {
+        grid-template-columns: 1fr;
+    }
+
+    .coluna-lateral {
+        position: static;
+    }
+
+    .abas-pessoas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .aba-pessoa {
+        text-align: center;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Oculta a coluna Pessoa */
+
+    th:nth-child(2),
+    td:nth-child(2) {
+        display: none;
+    }
+
+    th,
+    td {
+        font-size: 12px;
+        padding: 10px 5px;
+    }
+
+}
+
+
+/*CELULARES PEQUENOS*/
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 8px;
+    }
+
+    #cabecalho {
+        padding: 15px;
+    }
+
+    #titulo-cabecalho {
+        font-size: 19px;
+    }
+
+    .ano {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .card h2 {
+        font-size: 16px;
+    }
+
+    .resumo-item h2 {
+        font-size: 17px;
+    }
+
+    /* Oculta a coluna Categoria */
+
+    th:nth-child(4),
+    td:nth-child(4) {
+        display: none;
+    }
+
+    /* Redistribui o espaço da tabela */
+
+    th:nth-child(1),
+    td:nth-child(1) {
+        width: 22%;
+    }
+
+    th:nth-child(3),
+    td:nth-child(3) {
+        width: 35%;
+    }
+
+    th:nth-child(5),
+    td:nth-child(5) {
+        width: 25%;
+    }
+
+    th:nth-child(6),
+    td:nth-child(6) {
+        width: 18%;
+    }
+
+    th,
+    td {
+        font-size: 11px;
+        padding: 9px 4px;
+    }
+
+    td button {
+        padding: 7px 5px;
+        font-size: 10px;
+    }
+
+}
+
+
+/* TELAS MUITO PEQUENAS*/
+
+@media (max-width: 360px) {
+
+    #titulo-cabecalho {
+        font-size: 17px;
+    }
+
+    #p-cabecalho {
+        font-size: 12px;
+    }
+
+    .card {
+        padding: 11px;
+    }
+
+    .resumo-item h2 {
+        font-size: 15px;
+    }
+
+    th,
+    td {
+        font-size: 10px;
+        padding: 7px 3px;
+    }
+
+}

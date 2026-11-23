@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Controle de Despesas - 2026</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- CABEÇALHO -->
+        <header id="cabecalho">
+
+            <div>
+                <h1 id="titulo-cabecalho">
+                    Controle de Despesas
+                </h1>
+
+                <p id="p-cabecalho">
+                    Acompanhe seus gastos mensais.
+                </p>
+            </div>
+
+            <span class="ano">2026</span>
+
+        </header>
+
+
+
+        <div class="layout-principal">
+
+
+            <aside class="coluna-lateral">
+
+
+                <section class="card">
+
+                    <h2>Pessoas</h2>
+
+                    <hr>
+
+                    <button
+                        type="button"
+                        id="btnAbrirCadastro"
+                        class="btn-adicionar">
+
+                        + Adicionar pessoa
+
+                    </button>
+
+
+
+                    <form id="form-perfil" hidden>
+
+                        <div class="campo">
+
+                            <label for="nome">Nome:</label>
+
+                            <input
+                                type="text"
+                                id="nome"
+                                placeholder="Nome da pessoa"
+                                required>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="salario">Salário Mensal:</label>
+
+                            <input
+                                type="number"
+                                id="salario"
+                                min="0"
+                                step="0.01"
+                                placeholder="0,00"
+                                required>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="alimentacao">Alimentação:</label>
+
+                            <input
+                                type="number"
+                                id="alimentacao"
+                                min="0"
+                                step="0.01"
+                                placeholder="0,00"
+                                required>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            id="btn-salvar-pessoal">
+
+                            Salvar pessoa
+
+                        </button>
+
+                    </form>
+
+
+                    <hr>
+
+
+                    <div
+                        id="abasPessoas"
+                        class="abas-pessoas">
+
+                    </div>
+
+                </section>
+
+
+                <section class="card">
+
+                    <h2 id="tituloResumo">
+                        Resumo Financeiro
+                    </h2>
+
+                    <hr>
+
+                    <div id="calculo" class="resumo-grid">
+
+                        <div class="campo resumo-item">
+
+                            <p>Salário:</p>
+
+                            <h2 id="salarioResumo">
+                                R$ 0,00
+                            </h2>
+
+                        </div>
+
+
+                        <div class="campo resumo-item">
+
+                            <p>Alimentação:</p>
+
+                            <h2 id="alimentacaoResumo">
+                                R$ 0,00
+                            </h2>
+
+                        </div>
+
+
+                        <div class="campo resumo-item">
+
+                            <p>Total de despesas:</p>
+
+                            <h2 id="totalResumo">
+                                R$ 0,00
+                            </h2>
+
+                        </div>
+
+
+                        <div class="campo resumo-item saldo-item">
+
+                            <p>Saldo disponível:</p>
+
+                            <h2 id="saldoPagar">
+                                R$ 0,00
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </aside>
+
+
+
+            <main class="conteudo-principal">
+
+
+                <section class="card" id="cardDespesas">
+
+                    <h2>Adicionar Despesas</h2>
+
+                    <hr>
+
+                    <form
+                        id="form-despesas"
+                        class="form-grid">
+
+                        <div class="campo">
+
+                            <label for="dataDespesa">Data:</label>
+
+                            <input
+                                type="date"
+                                id="dataDespesa"
+                                required>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="descricao">Descrição:</label>
+
+                            <input
+                                type="text"
+                                id="descricao"
+                                placeholder="Descrição da despesa"
+                                required>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="categoria">Categoria:</label>
+
+                            <select id="categoria" required>
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                <option value="cartao">
+                                    Cartão de Crédito
+                                </option>
+
+                                <option value="aluguel">
+                                    Aluguel
+                                </option>
+
+                                <option value="agua">
+                                    Água
+                                </option>
+
+                                <option value="luz">
+                                    Luz
+                                </option>
+
+                                <option value="internet">
+                                    Internet
+                                </option>
+
+                                <option value="outros">
+                                    Outros
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="valor">Valor:</label>
+
+                            <input
+                                type="number"
+                                id="valor"
+                                min="0.01"
+                                step="0.01"
+                                placeholder="0,00"
+                                required>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            id="btn-salvar-despesa">
+
+                            + Adicionar Despesa
+
+                        </button>
+
+                    </form>
+
+                </section>
+
+
+
+                <section class="card">
+
+                    <h2 id="tituloLista">
+                        Lista de Despesas
+                    </h2>
+
+                    <hr>
+
+                    <div class="form-despesas">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Data</th>
+                                    <th>Pessoa</th>
+                                    <th>Descrição</th>
+                                    <th>Categoria</th>
+                                    <th>Valor</th>
+                                    <th>Ação</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="listaDespesas">
+
+                                <tr>
+
+                                    <td colspan="6">
+                                        Nenhuma despesa cadastrada.
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+
+
+        <footer>
+
+            <p>
+                Controle de Despesas © 2026
+            </p>
+
+            <span>
+                Desenvolvido para organização financeira.
+            </span>
+
+        </footer>
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
